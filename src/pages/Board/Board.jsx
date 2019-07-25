@@ -14,12 +14,7 @@ class Board extends Component {
   };
 
   render() {
-    return (
-      <main className="board">
-        <img />
-        {this.renderBoard()}
-      </main>
-    );
+    return <main className="board">{this.renderBoard()}</main>;
   }
 }
 

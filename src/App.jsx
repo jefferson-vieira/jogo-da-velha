@@ -1,9 +1,7 @@
 import React from 'react';
 
-import Board from './pages/Board'
+import Board from './pages/Board';
 
-const App = () => (
-  <Board />
-)
+const App = () => <Board />;
 
 export default App;

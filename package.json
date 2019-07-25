@@ -14,13 +14,10 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
+    "lint": "eslint --ext .js,.jsx src",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
@@ -35,7 +32,17 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.8",
     "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.5"
+    "@types/react-dom": "^16.8.5",
+    "eslint-config-airbnb": "17.1.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "prettier": "^1.18.2"
   }
 }

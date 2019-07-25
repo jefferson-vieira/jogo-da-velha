@@ -1,7 +1,7 @@
 import './index.scss';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createElement } from 'react';
+import { render } from 'react-dom';
 
 import './configs';
 
@@ -9,6 +9,6 @@ import App from './App';
 
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(createElement(App), document.getElementById('root'));
 
 serviceWorker.register();

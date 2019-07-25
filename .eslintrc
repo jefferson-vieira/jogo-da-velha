@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["react-app", "airbnb", "prettier"],
+  "plugins": ["react", "import", "prettier", "jsx-a11y"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true
+      }
+    ],
+    "react/no-array-index-key": "warn",
+    "react/prop-types": "off"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2019,
+    "sourceType": "module"
+  }
+}
