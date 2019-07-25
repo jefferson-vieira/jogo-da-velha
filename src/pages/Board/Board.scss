@@ -10,7 +10,11 @@
   grid-template-rows: $grid;
   grid-template-columns: $grid;
 
-  & .cell {
+  & .spot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: relative;
     border: 5px solid #333;
     cursor: pointer;
@@ -29,6 +33,16 @@
 
     &:nth-child(3n + 1) {
       border-left: none;
+    }
+
+    &:nth-child(n) svg {
+      animation: pulse 1s;
+
+      @keyframes pulse {
+        10% {
+          transform: scale(1.25);
+        }
+      }
     }
 
     &.win {

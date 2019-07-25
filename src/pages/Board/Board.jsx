@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 
-import Cell from './Cell'
+import Spot from './Spot';
 
 class Board extends Component {
+  state = {
+    board: [['', 'X', ''], ['', '', 'O'], ['', '', '']]
+  };
+
+  renderBoard = () => {
+    const { board } = this.state;
+
+    return board.flat().map((type, index) => <Spot key={index} type={type} />);
+  };
+
   render() {
     return (
       <main className="board">
-        <Cell />
-        <Cell />
-        <Cell />
-        <Cell />
-        <Cell />
-        <Cell />
-        <Cell />
-        <Cell />
-        <Cell />
+        <img />
+        {this.renderBoard()}
       </main>
     );
   }
