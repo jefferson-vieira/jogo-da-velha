@@ -1,8 +1,10 @@
 .board {
   $grid: 1fr 1fr 1fr;
+  $board: 500px;
+  $field: 80px;
 
-  height: 500px;
-  width: 500px;
+  height: $board;
+  width: $board;
 
   margin: auto;
 
@@ -10,13 +12,13 @@
   grid-template-rows: $grid;
   grid-template-columns: $grid;
 
-  & .spot {
+  & .field {
     display: flex;
     justify-content: center;
     align-items: center;
 
     position: relative;
-    border: 5px solid #333;
+    border: 2.5px solid #333;
     cursor: pointer;
 
     &:nth-child(-n + 3) {
@@ -35,13 +37,46 @@
       border-left: none;
     }
 
-    &:nth-child(n) svg {
+    &:nth-child(n) span {
       animation: pulse 1s;
 
       @keyframes pulse {
         10% {
           transform: scale(1.25);
         }
+      }
+    }
+
+    & .O {
+      height: $field - 5px;
+      width: $field - 5px;
+      border: 5px solid #333;
+      border-radius: 50%;
+    }
+
+    & .X {
+      position: relative;
+
+      height: $field;
+      width: $field;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: $field;
+        height: 5px;
+
+        background-color: #333;
+      }
+
+      &::before {
+        transform: rotateZ(45deg) translateY(-50%);
+      }
+
+      &::after {
+        transform: rotateZ(-45deg) translateY(-50%);
       }
     }
 

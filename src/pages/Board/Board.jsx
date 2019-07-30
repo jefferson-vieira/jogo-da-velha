@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Spot from './Spot';
+import Field from './Field';
 
 class Board extends Component {
   state = {
@@ -10,7 +10,7 @@ class Board extends Component {
   renderBoard = () => {
     const { board } = this.state;
 
-    return board.flat().map((type, index) => <Spot key={index} type={type} />);
+    return board.flat().map((type, index) => <Field key={index} type={type} />);
   };
 
   render() {
