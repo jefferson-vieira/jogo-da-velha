@@ -1,8 +1,12 @@
 import React, { memo } from 'react';
 
-const Field = ({ type }) => (
-  <div className="field">
-    <span className={type} />
+const Field = ({ type, ...props }) => (
+  <div
+    className="field"
+    {...props}
+    style={{ cursor: type ? 'not-allowed' : 'pointer' }}
+  >
+    {type && <span className={type} />}
   </div>
 );
 

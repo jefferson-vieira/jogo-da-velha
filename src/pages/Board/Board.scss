@@ -19,7 +19,10 @@
 
     position: relative;
     border: 2.5px solid #333;
-    cursor: pointer;
+
+    &:empty:hover {
+      background-color: rgba(#000, 0.1);
+    }
 
     &:nth-child(-n + 3) {
       border-top: none;
@@ -48,9 +51,11 @@
     }
 
     & .O {
-      height: $field - 5px;
-      width: $field - 5px;
-      border: 5px solid #333;
+      $border: 5px;
+
+      height: $field - $border;
+      width: $field - $border;
+      border: $border solid #333;
       border-radius: 50%;
     }
 

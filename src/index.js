@@ -3,8 +3,6 @@ import './index.scss';
 import { createElement } from 'react';
 import { render } from 'react-dom';
 
-import './configs';
-
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';

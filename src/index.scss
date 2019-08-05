@@ -1,8 +1,8 @@
-@import '../node_modules/bootstrap/scss/bootstrap-reboot.scss';
-@import '../node_modules/bootstrap/scss/utilities/borders';
+@import 'bootstrap/scss/bootstrap-reboot.scss';
 
 html,
-body {
+body,
+#root {
   width: 100%;
   height: 100%;
 }
@@ -23,6 +23,4 @@ code {
 
 #root {
   display: flex;
-
-  height: 100%;
 }
