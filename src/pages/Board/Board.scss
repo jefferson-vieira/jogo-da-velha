@@ -20,8 +20,16 @@
     position: relative;
     border: 2.5px solid #333;
 
-    &:empty:hover {
-      background-color: rgba(#000, 0.1);
+    &:hover {
+      &:empty {
+        background-color: rgba(#000, 0.1);
+
+        cursor: pointer;
+      }
+
+      &:not(:empty) {
+        cursor: not-allowed;
+      }
     }
 
     &:nth-child(-n + 3) {
