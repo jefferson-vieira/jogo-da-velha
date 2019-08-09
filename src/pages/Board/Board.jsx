@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { deepCopy, equals } from 'utils';
+import Modal from 'configs/swal';
+import { equals } from 'utils';
 
 import Field from './Field';
 
@@ -10,64 +11,84 @@ class Board extends Component {
   state = {
     // prettier-ignore
     board: [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', '']
+      '', '', '',
+      '', '', '',
+      '', '', ''
+    ],
+    // prettier-ignore
+    combos: [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
     ],
     player: Player.CROSS,
-    winner: null
+    winner: null,
+    end: false
   };
 
-  move = (i, j) => {
+  checkEnd = board => {
+    if (!board.some(field => !field)) {
+      Modal.fire('Empate!');
+
+      this.setState({
+        end: true
+      });
+    }
+  };
+
+  checkWin = (board, player) => {
+    const { combos } = this.state;
+
+    const winnerCombos = combos.filter(combo =>
+      equals(...combo.map(c => board[c]))
+    );
+
+    if (winnerCombos.length) {
+      Modal.fire(`O jogador ${player} venceu!`);
+
+      this.setState({
+        end: true,
+        winner: { player, combo: winnerCombos.flat() }
+      });
+
+      return;
+    }
+
+    this.checkEnd(board);
+  };
+
+  move = position => {
     const { board, player } = this.state;
 
-    const newBoard = deepCopy(board);
-
-    newBoard[i][j] = player;
+    const newBoard = [...board];
+    newBoard[position] = player;
 
     this.setState({
       board: newBoard,
       player: player === Player.CROSS ? Player.CIRCLE : Player.CROSS
     });
 
-    this.checkWinner();
-  };
-
-  checkWinner = () => {
-    const { board, player } = this.state;
-
-    if (
-      equals(board[0][0], board[1][1], board[2][2]) ||
-      equals(board[0][2], board[1][1], board[2][0]) ||
-      (() => {
-        for (let i = 0; i < 3; i++) {
-          if (
-            equals(board[i][0], board[i][1], board[i][2]) ||
-            equals(board[0][i], board[1][i], board[2][i])
-          ) {
-            return true;
-          }
-        }
-        return false;
-      })()
-    ) {
-      this.setState({ winner: player });
-    }
+    this.checkWin(newBoard, player);
   };
 
   renderBoard = () => {
-    const { board } = this.state;
+    const { board, winner, end } = this.state;
 
-    return board.map((fields, i) =>
-      fields.map((field, j) => (
-        <Field
-          key={[i, j]}
-          id={[i, j]}
-          type={field}
-          onClick={() => this.move(i, j)}
-        />
-      ))
-    );
+    return board.map((field, index) => (
+      <Field
+        key={index}
+        id={index}
+        type={field}
+        end={end}
+        win={winner && winner.combo.includes(index)}
+        onClick={field || winner ? undefined : () => this.move(index)}
+      />
+    ));
   };
 
   render() {

@@ -20,9 +20,9 @@
     position: relative;
     border: 2.5px solid #333;
 
-    &:hover {
+    &:not(.end):hover {
       &:empty {
-        background-color: rgba(#000, 0.1);
+        background-color: rgba(#333, 0.1);
 
         cursor: pointer;
       }
