@@ -7,33 +7,40 @@ import Field from './Field';
 
 import Player from './Player';
 
+const initialState = {
+  // prettier-ignore
+  board: [
+    '', '', '',
+    '', '', '',
+    '', '', ''
+  ],
+  // prettier-ignore
+  combos: [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+
+    [2, 4, 6]
+  ],
+  player: Player.CROSS,
+  winner: null,
+  end: false
+};
+
 class Board extends Component {
-  state = {
-    // prettier-ignore
-    board: [
-      '', '', '',
-      '', '', '',
-      '', '', ''
-    ],
-    // prettier-ignore
-    combos: [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ],
-    player: Player.CROSS,
-    winner: null,
-    end: false
+  state = initialState;
+
+  restart = () => {
+    this.setState(initialState);
   };
 
   checkEnd = board => {
     if (!board.some(field => !field)) {
-      Modal.fire('Empate!');
+      Modal.fire('Empate!').then(result => result.value && this.restart());
 
       this.setState({
         end: true
@@ -49,7 +56,9 @@ class Board extends Component {
     );
 
     if (winnerCombos.length) {
-      Modal.fire(`O jogador ${player} venceu!`);
+      Modal.fire(`O jogador ${player} venceu!`).then(
+        result => result.value && this.restart()
+      );
 
       this.setState({
         end: true,
