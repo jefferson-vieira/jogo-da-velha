@@ -45,7 +45,9 @@ class Board extends Component {
         end: true
       });
 
-      Modal.fire('Empate!').then(result => result.value && this.restart());
+      Modal.fire('Empate!').then(result => {
+        result.value && this.restart();
+      });
 
       addScore(Player.TIE);
     }
@@ -54,16 +56,16 @@ class Board extends Component {
   checkWin = (board, player) => {
     const { combos } = this.state;
 
-    const winnerCombos = combos.filter(combo =>
-      equals(...combo.map(c => board[c]))
-    );
+    const winnerCombos = combos.filter(combo => {
+      return equals(...combo.map(c => board[c]));
+    });
 
     if (winnerCombos.length) {
       const { addScore } = this.props;
 
-      Modal.fire(`O jogador ${player} venceu!`).then(
-        result => result.value && this.restart()
-      );
+      Modal.fire(`O jogador ${player} venceu!`).then(result => {
+        result.value && this.restart();
+      });
 
       this.setState({
         end: true,

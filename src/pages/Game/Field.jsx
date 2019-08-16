@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import classnames from 'classnames';
 
-const areEqual = (prevProps, nextProps) => {
+const propsAreEqual = (prevProps, nextProps) => {
   const { type: pType, end: pEnd, win: pWin } = prevProps;
   const { type: nType, end: nEnd, win: nWin } = nextProps;
 
@@ -14,4 +14,4 @@ const Field = ({ type, end, win, ...props }) => (
   </div>
 );
 
-export default memo(Field, areEqual);
+export default memo(Field, propsAreEqual);

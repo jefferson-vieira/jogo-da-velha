@@ -16,11 +16,11 @@ const Container = ({
     [Player.TIE]: tie
   }
 }) => (
-  <div id="score" className="game__score">
+  <section id="score" className="game__score">
     <Score player="Jogador X" score={playerX} />
     <Score player="Empate" score={tie} />
     <Score player="Jogador O" score={playerO} />
-  </div>
+  </section>
 );
 
 export default Container;
