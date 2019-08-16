@@ -23,7 +23,6 @@ const initialState = {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-
     [2, 4, 6]
   ],
   player: Player.CROSS,
@@ -40,11 +39,15 @@ class Board extends Component {
 
   checkEnd = board => {
     if (!board.some(field => !field)) {
-      Modal.fire('Empate!').then(result => result.value && this.restart());
+      const { addScore } = this.props;
 
       this.setState({
         end: true
       });
+
+      Modal.fire('Empate!').then(result => result.value && this.restart());
+
+      addScore(Player.TIE);
     }
   };
 
@@ -56,6 +59,8 @@ class Board extends Component {
     );
 
     if (winnerCombos.length) {
+      const { addScore } = this.props;
+
       Modal.fire(`O jogador ${player} venceu!`).then(
         result => result.value && this.restart()
       );
@@ -64,6 +69,8 @@ class Board extends Component {
         end: true,
         winner: { player, combo: winnerCombos.flat() }
       });
+
+      addScore(player);
 
       return;
     }

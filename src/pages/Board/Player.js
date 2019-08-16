@@ -1,6 +1,7 @@
 const Player = {
+  CIRCLE: 'O',
   CROSS: 'X',
-  CIRCLE: 'O'
+  TIE: 'T'
 };
 
 export default Player;
