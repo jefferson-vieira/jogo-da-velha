@@ -1,3 +1,3 @@
-import './Board.scss';
+import './Game.scss';
 
 export { default } from './Game';

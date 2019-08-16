@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Board from './pages/Board';
+import Game from './pages/Game';
 
-const App = () => <Board />;
+const App = () => <Game />;
 
 export default App;

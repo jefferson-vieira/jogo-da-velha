@@ -109,7 +109,7 @@ class Board extends Component {
 
   render() {
     return (
-      <main id="board" className="board">
+      <main id="board" className="game__board">
         {this.renderBoard()}
       </main>
     );

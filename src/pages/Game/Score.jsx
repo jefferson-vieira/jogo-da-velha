@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import Score from './Score';
+import Player from './Player';
 
-import Player from '../Player';
+const Score = memo(({ player, score }) => (
+  <div className="score">
+    <h1>{player}</h1>
+    <h2>{score}</h2>
+  </div>
+));
 
 const Container = ({
   score: {
@@ -11,7 +16,7 @@ const Container = ({
     [Player.TIE]: tie
   }
 }) => (
-  <div id="score" className="game__score-container">
+  <div id="score" className="game__score">
     <Score player="Jogador X" score={playerX} />
     <Score player="Empate" score={tie} />
     <Score player="Jogador O" score={playerO} />
