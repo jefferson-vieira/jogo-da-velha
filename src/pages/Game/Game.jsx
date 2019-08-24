@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 
-import Modal from 'configs/swal';
+import { reset as resetModal } from 'helpers/modals';
 
 import Actions from './Actions';
 import Board from './Board';
@@ -21,31 +21,21 @@ class Game extends Component {
 
   board = createRef();
 
+  reset = () => {
+    resetModal(this.restart);
+  };
+
+  restart = () => {
+    this.setState(initialState);
+    this.board.current.restart();
+  };
+
   addScore = player => {
     const {
       score: { [player]: playerScore, ...score }
     } = this.state;
 
     this.setState({ score: { ...score, [player]: playerScore + 1 } });
-  };
-
-  restart = () => {
-    this.board.current.restart();
-  };
-
-  reset = () => {
-    Modal.fire({
-      type: 'question',
-      title: 'Espera...',
-      text: 'Quer mesmo redefinir a pontuação?',
-      confirmButtonText: 'Quero!',
-      cancelButtonText: 'Ops...'
-    }).then(result => {
-      if (result.value) {
-        this.restart();
-        this.setState(initialState);
-      }
-    });
   };
 
   render() {

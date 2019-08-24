@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Modal from 'configs/swal';
 import { equals } from 'utils';
+import { tie as tieModal, win as winModal } from 'helpers/modals';
 
 import Field from './Field';
 
@@ -45,9 +45,7 @@ class Board extends Component {
         end: true
       });
 
-      Modal.fire('Empate!').then(result => {
-        result.value && this.restart();
-      });
+      tieModal(this.restart);
 
       addScore(Player.TIE);
     }
@@ -63,9 +61,7 @@ class Board extends Component {
     if (winnerCombos.length) {
       const { addScore } = this.props;
 
-      Modal.fire(`O jogador ${player} venceu!`).then(result => {
-        result.value && this.restart();
-      });
+      winModal(player, this.restart);
 
       this.setState({
         end: true,
@@ -80,6 +76,10 @@ class Board extends Component {
     this.checkEnd(board);
   };
 
+  changeTurn = player => {
+    return player === Player.CROSS ? Player.CIRCLE : Player.CROSS;
+  };
+
   move = position => {
     const { board, player } = this.state;
 
@@ -88,7 +88,7 @@ class Board extends Component {
 
     this.setState({
       board: newBoard,
-      player: player === Player.CROSS ? Player.CIRCLE : Player.CROSS
+      player: this.changeTurn(player)
     });
 
     this.checkWin(newBoard, player);
