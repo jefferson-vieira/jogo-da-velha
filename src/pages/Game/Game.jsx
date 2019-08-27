@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 
-import { reset as resetModal } from 'helpers/modals';
+import { reset as resetModal } from 'components/modals';
 
 import Actions from './Actions';
 import Board from './Board';

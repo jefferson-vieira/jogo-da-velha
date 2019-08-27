@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 import { equals } from 'utils';
-import { tie as tieModal, win as winModal } from 'helpers/modals';
+
+import { tie as tieModal, win as winModal } from 'components/modals';
+
+import minmax from 'helpers/computer';
 
 import Field from './Field';
 
@@ -26,6 +29,7 @@ const initialState = {
     [2, 4, 6]
   ],
   player: Player.CROSS,
+  isPlayerTurn: true,
   winner: null,
   end: false
 };
@@ -33,11 +37,19 @@ const initialState = {
 class Board extends Component {
   state = initialState;
 
+  componentDidUpdate() {
+    const { isPlayerTurn, end } = this.state;
+
+    if (isPlayerTurn || end) return;
+
+    this.computerTurn();
+  }
+
   restart = () => {
     this.setState(initialState);
   };
 
-  checkEnd = board => {
+  checkTie = board => {
     if (!board.some(field => !field)) {
       const { addScore } = this.props;
 
@@ -73,7 +85,7 @@ class Board extends Component {
       return;
     }
 
-    this.checkEnd(board);
+    this.checkTie(board);
   };
 
   changeTurn = player => {
@@ -94,6 +106,22 @@ class Board extends Component {
     this.checkWin(newBoard, player);
   };
 
+  computerTurn = () => {
+    const { board } = this.state;
+
+    const position = minmax(board);
+
+    this.move(position);
+
+    this.setState({ isPlayerTurn: true });
+  };
+
+  playerTurn = position => {
+    this.move(position);
+
+    this.setState({ isPlayerTurn: false });
+  };
+
   renderBoard = () => {
     const { board, winner, end } = this.state;
 
@@ -104,7 +132,7 @@ class Board extends Component {
         type={field}
         end={end}
         win={winner && winner.combo.includes(index)}
-        onClick={field || winner ? undefined : () => this.move(index)}
+        onClick={field || winner ? undefined : () => this.playerTurn(index)}
       />
     ));
   };
