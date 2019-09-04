@@ -95,8 +95,7 @@ class Board extends Component {
   move = position => {
     const { board, player } = this.state;
 
-    const newBoard = [...board];
-    newBoard[position] = player;
+    const newBoard = Object.assign([...board], { [position]: player });
 
     this.setState({
       board: newBoard,
@@ -107,9 +106,9 @@ class Board extends Component {
   };
 
   computerTurn = () => {
-    const { board } = this.state;
+    const { board, player } = this.state;
 
-    const position = minmax(board);
+    const { position } = minmax(board, player);
 
     this.move(position);
 
