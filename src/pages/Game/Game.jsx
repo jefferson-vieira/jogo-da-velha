@@ -21,13 +21,15 @@ class Game extends Component {
 
   board = createRef();
 
-  reset = () => {
-    resetModal(this.restart);
+  restart = () => {
+    this.board.current.restart();
   };
 
-  restart = () => {
-    this.setState(initialState);
-    this.board.current.restart();
+  reset = () => {
+    resetModal(() => {
+      this.setState(initialState);
+      this.restart();
+    });
   };
 
   addScore = player => {
