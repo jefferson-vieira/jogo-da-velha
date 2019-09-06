@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { equals } from 'utils';
+import { didRender, equals, executionTimeAtLeast } from 'utils';
 
 import { tie as tieModal, win as winModal } from 'components/modals';
 
@@ -29,7 +29,7 @@ const initialState = {
     [2, 4, 6]
   ],
   player: Player.CROSS,
-  isPlayerTurn: true,
+  loading: false,
   winner: null,
   end: false
 };
@@ -37,12 +37,8 @@ const initialState = {
 class Board extends Component {
   state = initialState;
 
-  componentDidUpdate() {
-    const { isPlayerTurn, end } = this.state;
-
-    if (isPlayerTurn || end) return;
-
-    this.computerTurn();
+  shouldComponentUpdate(_, nextState) {
+    return !nextState.loading;
   }
 
   restart = () => {
@@ -105,20 +101,24 @@ class Board extends Component {
     this.checkWin(newBoard, player);
   };
 
-  computerTurn = () => {
-    const { board, player } = this.state;
+  computerTurn = async () => {
+    this.setState({ loading: true });
 
-    const { position } = minmax(board, player);
+    await executionTimeAtLeast(() => {
+      const { board, player } = this.state;
 
-    this.move(position);
+      const { position } = minmax(board, player);
 
-    this.setState({ isPlayerTurn: true });
+      this.move(position);
+    }, 500);
+
+    this.setState({ loading: false });
   };
 
   playerTurn = position => {
     this.move(position);
 
-    this.setState({ isPlayerTurn: false });
+    didRender(this.computerTurn);
   };
 
   renderBoard = () => {

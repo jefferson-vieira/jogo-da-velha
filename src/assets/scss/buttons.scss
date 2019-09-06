@@ -22,7 +22,6 @@
   &:hover:after,
   &:active:after {
     transform: scaleX(0);
-    transform-origin: right;
     transition: transform 0.5s ease;
   }
 
@@ -30,7 +29,7 @@
     z-index: -1;
 
     transform: scaleX(1);
-    transform-origin: left;
+    transform-origin: center;
     transition: transform 0.5s ease;
   }
 

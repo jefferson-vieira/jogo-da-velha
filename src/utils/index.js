@@ -1,2 +1,3 @@
-export { default as deepCopy } from './deepCopy';
+export { default as didRender } from './didRender';
 export { default as equals } from './equals';
+export { default as executionTimeAtLeast } from './executionTimeAtLeast';
