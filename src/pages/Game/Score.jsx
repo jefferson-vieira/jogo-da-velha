@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import Player from './Player';
+import Player from '../../models/Player';
 
 const Score = memo(({ player, score }) => (
   <div className="score">

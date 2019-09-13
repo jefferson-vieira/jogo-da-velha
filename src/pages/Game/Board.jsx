@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
-import { didRender, equals, executionTimeAtLeast } from 'utils';
+import { didRender, executionTimeAtLeast } from 'utils';
 
 import { tie as tieModal, win as winModal } from 'components/modals';
 
 import minmax from 'helpers/computer';
+import { changeTurn, getWinnerCombos, checkTie } from 'helpers/game';
+
+import Player from 'models/Player';
 
 import Field from './Field';
-
-import Player from './Player';
 
 const initialState = {
   // prettier-ignore
@@ -16,17 +17,6 @@ const initialState = {
     '', '', '',
     '', '', '',
     '', '', ''
-  ],
-  // prettier-ignore
-  combos: [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
   ],
   player: Player.CROSS,
   loading: false,
@@ -45,26 +35,27 @@ class Board extends Component {
     this.setState(initialState);
   };
 
-  checkTie = board => {
-    if (!board.some(field => !field)) {
+  checkTie = (board, player) => {
+    if (checkTie(board)) {
       const { addScore } = this.props;
 
       this.setState({
-        end: true
+        end: true,
+        loading: false
       });
 
       tieModal(this.restart);
 
       addScore(Player.TIE);
+
+      return;
     }
+
+    this.setState({ player: changeTurn(player) });
   };
 
   checkWin = (board, player) => {
-    const { combos } = this.state;
-
-    const winnerCombos = combos.filter(combo => {
-      return equals(...combo.map(c => board[c]));
-    });
+    const winnerCombos = getWinnerCombos(board);
 
     if (winnerCombos.length) {
       const { addScore } = this.props;
@@ -73,6 +64,7 @@ class Board extends Component {
 
       this.setState({
         end: true,
+        loading: false,
         winner: { player, combo: winnerCombos.flat() }
       });
 
@@ -81,11 +73,7 @@ class Board extends Component {
       return;
     }
 
-    this.checkTie(board);
-  };
-
-  changeTurn = player => {
-    return player === Player.CROSS ? Player.CIRCLE : Player.CROSS;
+    this.checkTie(board, player);
   };
 
   move = position => {
@@ -94,8 +82,7 @@ class Board extends Component {
     const newBoard = Object.assign([...board], { [position]: player });
 
     this.setState({
-      board: newBoard,
-      player: this.changeTurn(player)
+      board: newBoard
     });
 
     this.checkWin(newBoard, player);
@@ -106,9 +93,7 @@ class Board extends Component {
 
     await executionTimeAtLeast(() => {
       const { board, player } = this.state;
-
       const { position } = minmax(board, player);
-
       this.move(position);
     }, 500);
 

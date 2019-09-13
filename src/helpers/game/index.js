@@ -1,6 +1,6 @@
 import { equals } from 'utils';
 
-import Player from 'pages/Game/Player';
+import Player from 'models/Player';
 
 const combos = [
   [0, 1, 2],
@@ -13,10 +13,22 @@ const combos = [
   [2, 4, 6]
 ];
 
-export function changeTurn(player) {
-  return player === Player.CIRCLE ? Player.CROSS : Player.CIRCLE;
+function matchCombosToBoard(board, strategy) {
+  return combos[strategy](combo => equals(...combo.map(c => board[c])));
 }
 
 export function checkWin(board) {
-  return combos.some(combo => equals(...combo.map(c => board[c])));
+  return matchCombosToBoard(board, 'some');
+}
+
+export function getWinnerCombos(board) {
+  return matchCombosToBoard(board, 'filter');
+}
+
+export function checkTie(board) {
+  return board.every(Boolean);
+}
+
+export function changeTurn(player) {
+  return player === Player.CIRCLE ? Player.CROSS : Player.CIRCLE;
 }

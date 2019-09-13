@@ -1,6 +1,8 @@
 import { changeTurn, checkWin } from 'helpers/game';
 
-import Player from 'pages/Game/Player';
+import Player from 'models/Player';
+
+import { getRandomFrom } from 'utils';
 
 function getWorseMoves(moves) {
   const { score: worseScore } = moves.reduce((move, nextMove) => {
@@ -36,7 +38,7 @@ function minmax(board, player) {
 
   const emptyPositions = board.flatMap((field, index) => (field ? [] : index));
 
-  if (emptyPositions.length === 0) {
+  if (!emptyPositions.length) {
     return { score: 0 };
   }
 
@@ -45,7 +47,7 @@ function minmax(board, player) {
   const nextMoves =
     player === Player.CIRCLE ? getBestMoves(moves) : getWorseMoves(moves);
 
-  return nextMoves[Math.floor(Math.random() * nextMoves.length)];
+  return getRandomFrom(nextMoves);
 }
 
 export default minmax;

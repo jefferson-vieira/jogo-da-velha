@@ -6,7 +6,7 @@ import Actions from './Actions';
 import Board from './Board';
 import Score from './Score';
 
-import Player from './Player';
+import Player from '../../models/Player';
 
 const initialState = {
   score: {
