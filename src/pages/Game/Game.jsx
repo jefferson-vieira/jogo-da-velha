@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 
-import { reset as resetModal } from 'components/modals';
+import { exit as exitModal, reset as resetModal } from 'components/modals';
 
 import Actions from './Actions';
 import Board from './Board';
@@ -20,6 +20,14 @@ class Game extends Component {
   state = initialState;
 
   board = createRef();
+
+  exit = () => {
+    const { history } = this.props;
+
+    exitModal(() => {
+      history.push('/home');
+    });
+  };
 
   restart = () => {
     this.board.current.restart();
@@ -41,13 +49,18 @@ class Game extends Component {
   };
 
   render() {
+    const { location } = this.props;
     const { score } = this.state;
 
     return (
       <section id="game" className="game">
         <Score score={score} />
-        <Board ref={this.board} addScore={this.addScore} />
-        <Actions restart={this.restart} reset={this.reset} />
+        <Board
+          ref={this.board}
+          addScore={this.addScore}
+          computer={location.state.cpu}
+        />
+        <Actions exit={this.exit} restart={this.restart} reset={this.reset} />
       </section>
     );
   }

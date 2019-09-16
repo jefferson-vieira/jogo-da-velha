@@ -24,7 +24,11 @@ class Menu extends Component {
       <section id="home" className="home">
         <h1>Jogo da Velha</h1>
         <Players isCPUActive={cpu} onChangePlayers={this.handlePlayers} />
-        <Link to="/game" className="home__play" title="Novo jogo">
+        <Link
+          to={{ pathname: '/game', state: { cpu } }}
+          className="home__play"
+          title="Novo jogo"
+        >
           Jogar
         </Link>
       </section>

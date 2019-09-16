@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-const Actions = ({ reset, restart }) => (
+const Actions = ({ exit, reset, restart }) => (
   <section id="actions" className="game__actions">
     <button
       type="button"
@@ -17,6 +17,14 @@ const Actions = ({ reset, restart }) => (
       onClick={reset}
     >
       Redefinir
+    </button>
+    <button
+      type="button"
+      className="btn btn--secondary"
+      title="Voltar ao início"
+      onClick={exit}
+    >
+      Sair
     </button>
   </section>
 );
