@@ -1,0 +1,21 @@
+@import 'assets/scss/variables';
+@import 'assets/scss/mixins';
+@import 'assets/scss/buttons';
+
+.radio {
+  @extend .btn;
+  @extend .btn--secondary;
+
+  margin: 0;
+
+  cursor: pointer;
+
+  &--active {
+    background: $primary;
+    color: $secondary;
+  }
+
+  input {
+    display: none;
+  }
+}

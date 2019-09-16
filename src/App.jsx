@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Game from './pages/Game';
+import Routes from 'routes';
 
-const App = () => <Game />;
+const App = () => <Routes />;
 
 export default App;
