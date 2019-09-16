@@ -89,6 +89,9 @@ class Board extends Component {
   };
 
   computerTurn = async () => {
+    const { end } = this.state;
+    if (end) return;
+
     this.setState({ loading: true });
 
     await executionTimeAtLeast(() => {
