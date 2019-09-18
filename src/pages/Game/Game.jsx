@@ -58,7 +58,7 @@ class Game extends Component {
         <Board
           ref={this.board}
           addScore={this.addScore}
-          computer={location.state.cpu}
+          isCPUActive={location.state.isCPUActive}
         />
         <Actions exit={this.exit} restart={this.restart} reset={this.reset} />
       </section>

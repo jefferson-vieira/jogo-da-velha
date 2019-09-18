@@ -12,13 +12,10 @@ import Player from 'models/Player';
 import Field from './Field';
 
 const initialState = {
-  // prettier-ignore
-  board: [
-    '', '', '',
-    '', '', '',
-    '', '', ''
-  ],
+  board: Array(9).fill(null),
+  computer: Player.CIRCLE,
   player: Player.CROSS,
+  turn: Player.CROSS,
   loading: false,
   winner: null,
   end: false
@@ -31,11 +28,18 @@ class Board extends Component {
     return !nextState.loading;
   }
 
+  componentDidUpdate() {
+    const { isCPUActive } = this.props;
+    const { computer, turn } = this.state;
+
+    if (isCPUActive && turn === computer) didRender(this.computerTurn);
+  }
+
   restart = () => {
     this.setState(initialState);
   };
 
-  checkTie = (board, player) => {
+  checkTie = (board, turn) => {
     if (checkTie(board)) {
       const { addScore } = this.props;
 
@@ -51,41 +55,39 @@ class Board extends Component {
       return;
     }
 
-    this.setState({ player: changeTurn(player) });
+    this.setState({ turn: changeTurn(turn) });
   };
 
-  checkWin = (board, player) => {
+  checkWin = (board, turn) => {
     const winnerCombos = getWinnerCombos(board);
 
     if (winnerCombos.length) {
       const { addScore } = this.props;
 
-      winModal(player, this.restart);
+      winModal(turn, this.restart);
 
       this.setState({
         end: true,
         loading: false,
-        winner: { player, combo: winnerCombos.flat() }
+        winner: { turn, combo: winnerCombos.flat() }
       });
 
-      addScore(player);
+      addScore(turn);
 
       return;
     }
 
-    this.checkTie(board, player);
+    this.checkTie(board, turn);
   };
 
   move = position => {
-    const { board, player } = this.state;
+    const { board, turn } = this.state;
 
-    const newBoard = Object.assign([...board], { [position]: player });
+    const newBoard = Object.assign([...board], { [position]: turn });
 
-    this.setState({
-      board: newBoard
-    });
+    this.setState({ board: newBoard });
 
-    this.checkWin(newBoard, player);
+    this.checkWin(newBoard, turn);
   };
 
   computerTurn = async () => {
@@ -95,8 +97,8 @@ class Board extends Component {
     this.setState({ loading: true });
 
     await executionTimeAtLeast(() => {
-      const { board, player } = this.state;
-      const { position } = minmax(board, player);
+      const { board, computer, turn } = this.state;
+      const { position } = minmax(board, computer, turn);
       this.move(position);
     }, 500);
 
@@ -105,8 +107,6 @@ class Board extends Component {
 
   playerTurn = position => {
     this.move(position);
-
-    didRender(this.computerTurn);
   };
 
   renderBoard = () => {

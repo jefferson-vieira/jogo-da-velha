@@ -7,21 +7,21 @@ const Players = ({ isCPUActive, onChangePlayers }) => (
     <h3>Número de jogadores:</h3>
     <div className="home__players__actions">
       <Radio
-        id="rbPlayers1"
-        name="players"
+        id="radio-is-cpu-active-0"
+        name="isCPUActive"
         checked={isCPUActive}
-        value="true"
         label="1 Jogador"
         title="Jogue contra a máquina"
+        value="true"
         onChange={onChangePlayers}
       />
       <Radio
-        id="rbPlayers2"
-        name="players"
+        id="radio-is-cpu-active-1"
+        name="isCPUActive"
         checked={!isCPUActive}
-        value="false"
         label="2 Jogadores"
         title="Jogue contra um amigo"
+        value="false"
         onChange={onChangePlayers}
       />
     </div>
