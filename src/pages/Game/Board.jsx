@@ -30,9 +30,9 @@ class Board extends Component {
 
   componentDidUpdate() {
     const { isCPUActive } = this.props;
-    const { computer, turn } = this.state;
+    const { computer, end, turn } = this.state;
 
-    if (isCPUActive && turn === computer) didRender(this.computerTurn);
+    if (isCPUActive && !end && turn === computer) didRender(this.computerTurn);
   }
 
   restart = () => {
@@ -91,9 +91,6 @@ class Board extends Component {
   };
 
   computerTurn = async () => {
-    const { end } = this.state;
-    if (end) return;
-
     this.setState({ loading: true });
 
     await executionTimeAtLeast(() => {
@@ -119,7 +116,7 @@ class Board extends Component {
         type={field}
         end={end}
         win={winner && winner.combo.includes(index)}
-        onClick={field || winner ? undefined : () => this.playerTurn(index)}
+        onClick={field || end ? undefined : () => this.playerTurn(index)}
       />
     ));
   };
