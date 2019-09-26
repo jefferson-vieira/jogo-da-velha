@@ -2,26 +2,32 @@
 
 .game {
   width: 100%;
-  height: 100%;
 
-  padding: 1rem;
+  margin: 1rem;
 
   display: grid;
   grid-gap: 3rem;
 
+  overflow: auto;
+
   &__board {
-    $grid: 1fr 1fr 1fr;
-    $board: 500px;
+    $board: calc(100vmin - 2rem);
+    $board--max: 500px;
+
     $field: 80px;
 
-    width: $board;
-    height: $board;
+    $grid: 1fr 1fr 1fr;
 
     margin: auto;
 
+    height: $board;
+    width: $board;
+
+    max-height: $board--max;
+    max-width: $board--max;
+
     display: grid;
-    grid-template-rows: $grid;
-    grid-template-columns: $grid;
+    grid-template: $grid / $grid;
 
     & .field {
       display: flex;
@@ -30,18 +36,6 @@
 
       position: relative;
       border: 2.5px solid $primary;
-
-      &:not(.end):hover {
-        &:empty {
-          background: rgba($primary, 0.1);
-
-          cursor: pointer;
-        }
-
-        &:not(:empty) {
-          cursor: not-allowed;
-        }
-      }
 
       &:nth-child(-n + 3) {
         border-top: none;
@@ -66,6 +60,15 @@
           10% {
             transform: scale(1.25);
           }
+        }
+      }
+
+      &:not(.end):hover {
+        cursor: not-allowed;
+
+        &:empty {
+          background: rgba($primary, 0.1);
+          cursor: pointer;
         }
       }
 
@@ -142,6 +145,14 @@
 
     button {
       min-width: 165px;
+    }
+
+    @media screen and (max-width: 100vmin) {
+      flex-direction: column;
+
+      button {
+        margin-bottom: 1rem;
+      }
     }
   }
 }

@@ -1,5 +1,23 @@
-.swal2-icon {
-  &::before {
-    height: 100% !important;
+.swal2 {
+  &-icon {
+    &::before {
+      height: 100% !important;
+    }
+  }
+
+  &-actions {
+    display: flex;
+
+    button {
+      min-width: 165px;
+    }
+
+    @media screen and (max-width: 100vmin) {
+      flex-direction: column-reverse;
+
+      button {
+        margin-bottom: 1rem;
+      }
+    }
   }
 }

@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'mixins';
 
 .btn {
   $border: 2px solid;
@@ -19,19 +18,17 @@
     text-decoration: none;
   }
 
-  &:after,
-  &:before {
+  &::after,
+  &::before {
     content: '';
-    @include cover();
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 
-  &:hover:after,
-  &:active:after {
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
-  }
-
-  &:after {
+  &::after {
     z-index: -1;
 
     transform: scaleX(1);
@@ -39,7 +36,13 @@
     transition: transform 0.5s ease;
   }
 
-  &:before {
+  &:hover::after,
+  &:active::after {
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+  }
+
+  &::before {
     z-index: -2;
   }
 
@@ -53,11 +56,11 @@
       color: $primary;
     }
 
-    &:after {
+    &::after {
       background: $primary;
     }
 
-    &:before {
+    &::before {
       background: $secondary;
     }
   }
@@ -67,16 +70,18 @@
 
     color: $primary;
 
+    // mix-blend-mode: difference !important;
+
     &:hover,
     &:active {
       color: $secondary;
     }
 
-    &:after {
+    &::after {
       background: $secondary;
     }
 
-    &:before {
+    &::before {
       background: $primary;
     }
   }
