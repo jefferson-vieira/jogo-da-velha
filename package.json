@@ -2,23 +2,32 @@
   "name": "jogo-da-velha",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "classnames": "^2.2.6",
-    "node-sass": "^4.12.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "sweetalert2": "^8.15.2",
-    "sweetalert2-react-content": "^1.1.0"
+  "description": "Jogo da velha com IA para o TCC",
+  "keywords": [
+    "AI",
+    "javascript"
+  ],
+  "homepage": "https://jogo-da-velha-com-ia.herokuapp.com/",
+  "bugs": {
+    "url": "https://github.com/jefferson-vieira/jogo-da-velha/issues",
+    "email": "jefferson98.vieira@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jefferson-vieira/jogo-da-velha.git"
+  },
+  "author": "Jefferson Vieira da Silva <jefferson98.vieira@gmail.com> (https://github.com/jefferson-vieira/)",
+  "files": [
+    "build"
+  ],
+  "main": "src/index.js",
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "build": "react-scripts build",
     "lint": "run-s lint:**",
     "lint:js": "eslint --ext .js,.jsx src",
     "lint:scss": "stylelint 'src/**/*.{css,scss}'",
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test"
   },
   "browserslist": {
@@ -32,6 +41,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
+    "node-sass": "^4.12.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "serve": "^11.2.0",
+    "sweetalert2": "^8.15.2",
+    "sweetalert2-react-content": "^1.1.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
@@ -49,6 +70,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "prettier": "^1.18.2",
+    "source-map-explorer": "^2.1.0",
     "stylelint": "^11.0.0",
     "stylelint-config-prettier": "^6.0.0",
     "stylelint-config-standard": "^19.0.0",
@@ -57,5 +79,10 @@
     "stylelint-scss": "^3.11.1",
     "stylelint-selector-bem-pattern": "^2.1.0",
     "yarn-run-all": "^3.1.1"
+  },
+  "engines": {
+    "node": ">= 10.16.3",
+    "npm": ">= 6.11.3",
+    "yarn": "^1.17.3"
   }
 }

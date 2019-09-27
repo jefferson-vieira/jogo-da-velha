@@ -1,68 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Welcome to jogo-da-velha 👋
+![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000)
+![Prerequisite](https://img.shields.io/badge/node-%3E%3D%2010.16.3-blue.svg)
+![Prerequisite](https://img.shields.io/badge/npm-%3E%3D%206.11.3-blue.svg)
+![Prerequisite](https://img.shields.io/badge/yarn-%5E1.17.3-blue.svg)
+[![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/jefferson-vieira/jogo-da-velha#readme)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/jefferson-vieira/jogo-da-velha/graphs/commit-activity)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jefferson-vieira/jogo-da-velha/blob/master/LICENSE)
 
-## Available Scripts
+> Jogo da velha com IA para o TCC
 
-In the project directory, you can run:
+### 🏠 [Homepage](https://jogo-da-velha-com-ia.herokuapp.com/)
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- node >= 10.16.3
+- npm >= 6.11.3
+- yarn ^1.17.3
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Install
 
-### `npm test`
+Use the package manager [yarn](https://yarnpkg.com/lang/en/) to install.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npm i -g yarn
+yarn install
+```
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+yarn start
+```
+You can now view jogo-da-velha in the browser, on default port 3000.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Run tests
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+yarn test
+```
 
-### `npm run eject`
+## Build production
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+yarn build
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Author
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+👤 **Jefferson Vieira da Silva**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Github: [@jefferson-vieira](https://github.com/jefferson-vieira)
 
-## Learn More
+## 🤝 Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contributions, issues and feature requests are welcome!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Feel free to check [issues page](https://github.com/jefferson-vieira/jogo-da-velha/issues).
 
-### Code Splitting
+## Show your support
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Give a ⭐️ if this project helped you!
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## 📝 License
 
-### Making a Progressive Web App
+Copyright © 2019 [Jefferson Vieira da Silva](https://github.com/jefferson-vieira).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+This project is [MIT](https://github.com/jefferson-vieira/jogo-da-velha/blob/master/LICENSE) licensed.
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator), with some modifications_
