@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { StrictMode as Strict } from 'react';
 
 import Routes from 'routes';
 
-const App = () => <Routes />;
+const App = () => (
+  <Strict>
+    <Routes />
+  </Strict>
+);
 
 export default App;
