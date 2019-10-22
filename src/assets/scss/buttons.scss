@@ -8,81 +8,39 @@
   margin: 0 0.5rem;
   padding: 0.5rem 2rem;
 
-  background: transparent;
   outline: none !important;
 
   text-align: center;
   text-transform: uppercase;
 
+  transition: 0.5s ease;
+
   &:hover {
     text-decoration: none;
   }
 
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  &::after {
-    z-index: -1;
-
-    transform: scaleX(1);
-    transform-origin: center;
-    transition: transform 0.5s ease;
-  }
-
-  &:hover::after,
-  &:active::after {
-    transform: scaleX(0);
-    transition: transform 0.5s ease;
-  }
-
-  &::before {
-    z-index: -2;
+  &--primary,
+  &--secondary {
+    border: $border $primary;
   }
 
   &--primary {
-    border: $border $primary;
-
+    background: $primary;
     color: $secondary;
 
-    &:hover,
-    &:active {
-      color: $primary;
-    }
-
-    &::after {
-      background: $primary;
-    }
-
-    &::before {
+    &:hover {
       background: $secondary;
+      color: $primary;
     }
   }
 
   &--secondary {
-    border: $border $primary;
-
+    background: $secondary;
     color: $primary;
 
-    // mix-blend-mode: difference !important;
-
-    &:hover,
-    &:active {
-      color: $secondary;
-    }
-
-    &::after {
-      background: $secondary;
-    }
-
-    &::before {
+    &:hover {
       background: $primary;
+      color: $secondary;
     }
   }
 }

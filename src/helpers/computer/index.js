@@ -1,52 +1,41 @@
-import { changeTurn, checkWin } from 'helpers/game';
+import { changeTurn, checkWin, checkTie } from 'helpers/game';
 
 import { getRandomFrom } from 'utils';
 
-function getWorseMoves(moves) {
-  const { score: worseScore } = moves.reduce((move, nextMove) => {
-    return move.score < nextMove.score ? move : nextMove;
-  });
-
-  return moves.filter(move => move.score === worseScore);
-}
-
-function getBestMoves(moves) {
-  const { score: bestScore } = moves.reduce((move, nextMove) => {
-    return move.score > nextMove.score ? move : nextMove;
-  });
-
-  return moves.filter(move => move.score === bestScore);
+function filterMoves(moves, strategy) {
+  const boundary = Math[strategy](...moves.map(move => move.score));
+  return moves.filter(move => move.score === boundary);
 }
 
 function getMoves(board, emptyPositions, computer, turn) {
   return emptyPositions.map(position => {
-    const { score } = minmax(
-      Object.assign([...board], { [position]: turn }),
-      computer,
-      changeTurn(turn)
-    );
+    const newBoard = Object.assign([...board], { [position]: turn });
+
+    // eslint-disable-next-line
+    const { score } = minmax(newBoard, computer, changeTurn(turn));
 
     return { position, score };
   });
 }
 
 function minmax(board, computer, turn) {
+  const isComputerTurn = turn === computer;
+
   if (checkWin(board)) {
-    return { score: turn === computer ? -1 : 1 };
+    return { score: isComputerTurn ? -1 : 1 };
+  }
+
+  if (checkTie(board)) {
+    return { score: 0 };
   }
 
   const emptyPositions = board.flatMap((field, index) => (field ? [] : index));
 
-  if (!emptyPositions.length) {
-    return { score: 0 };
-  }
-
   const moves = getMoves(board, emptyPositions, computer, turn);
 
-  const nextMoves =
-    turn === computer ? getBestMoves(moves) : getWorseMoves(moves);
+  const possibleMoves = filterMoves(moves, isComputerTurn ? 'max' : 'min');
 
-  return getRandomFrom(nextMoves);
+  return getRandomFrom(possibleMoves);
 }
 
 export default minmax;

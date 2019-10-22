@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { ComputerContext } from 'store';
+
 import { didRender, executionTimeAtLeast } from 'utils';
 
 import { tie as tieModal, win as winModal } from 'components/modals';
@@ -22,17 +24,12 @@ const initialState = {
 };
 
 class Board extends Component {
+  static contextType = ComputerContext;
+
   state = initialState;
 
   shouldComponentUpdate(_, nextState) {
     return !nextState.loading;
-  }
-
-  componentDidUpdate() {
-    const { isCPUActive } = this.props;
-    const { computer, end, turn } = this.state;
-
-    if (isCPUActive && !end && turn === computer) didRender(this.computerTurn);
   }
 
   restart = () => {
@@ -90,20 +87,26 @@ class Board extends Component {
     this.checkWin(newBoard, turn);
   };
 
-  computerTurn = async () => {
-    this.setState({ loading: true });
-
-    await executionTimeAtLeast(() => {
-      const { board, computer, turn } = this.state;
-      const { position } = minmax(board, computer, turn);
-      this.move(position);
-    }, 500);
-
-    this.setState({ loading: false });
+  computerTurn = () => {
+    const { board, computer, turn } = this.state;
+    const { position } = minmax(board, computer, turn);
+    this.move(position);
   };
 
-  playerTurn = position => {
+  checkComputer = async () => {
+    const { isComputerActive } = this.context;
+
+    if (isComputerActive) {
+      this.setState({ loading: true });
+      await executionTimeAtLeast(this.computerTurn, 500);
+      this.setState({ loading: false });
+    }
+  };
+
+  playerTurn = async position => {
     this.move(position);
+
+    didRender(this.checkComputer);
   };
 
   renderBoard = () => {
@@ -111,6 +114,7 @@ class Board extends Component {
 
     return board.map((field, index) => (
       <Field
+        // eslint-disable-next-line
         key={index}
         id={index}
         type={field}
@@ -123,9 +127,11 @@ class Board extends Component {
 
   render() {
     return (
-      <main id="board" className="game__board">
-        {this.renderBoard()}
-      </main>
+      <>
+        <main id="board" className="game__board">
+          {this.renderBoard()}
+        </main>
+      </>
     );
   }
 }

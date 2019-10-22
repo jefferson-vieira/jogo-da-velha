@@ -1,3 +1,3 @@
-export default function didRender(cb) {
-  requestAnimationFrame(() => requestAnimationFrame(cb));
+export default function didRender(fn) {
+  setImmediate(fn);
 }

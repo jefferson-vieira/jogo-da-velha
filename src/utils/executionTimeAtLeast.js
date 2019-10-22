@@ -1,6 +1,6 @@
-export default function executionTimeAtLeast(cb, duration, ...args) {
+export default function executionTimeAtLeast(fn, duration, ...args) {
   return new Promise(resolve => {
     setTimeout(resolve, duration);
-    cb(...args);
+    fn(...args);
   });
 }
