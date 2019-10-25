@@ -95,8 +95,9 @@ class Board extends Component {
 
   checkComputer = async () => {
     const { isComputerActive } = this.context;
+    const { end } = this.state;
 
-    if (isComputerActive) {
+    if (isComputerActive && !end) {
       this.setState({ loading: true });
       await executionTimeAtLeast(this.computerTurn, 500);
       this.setState({ loading: false });

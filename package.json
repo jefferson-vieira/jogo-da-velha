@@ -7,7 +7,7 @@
     "AI",
     "javascript"
   ],
-  "homepage": "https://jogo-da-velha-com-ia.herokuapp.com/",
+  "homepage": "https://jogo-da-velha-com-ia.herokuapp.com",
   "bugs": {
     "url": "https://github.com/jefferson-vieira/jogo-da-velha/issues",
     "email": "jefferson98.vieira@gmail.com"
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/jefferson-vieira/jogo-da-velha.git"
   },
-  "author": "Jefferson Vieira da Silva <jefferson98.vieira@gmail.com> (https://github.com/jefferson-vieira/)",
+  "author": "Jefferson Vieira da Silva <jefferson98.vieira@gmail.com> (https://github.com/jefferson-vieira)",
   "files": [
     "build"
   ],

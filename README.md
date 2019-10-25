@@ -9,7 +9,7 @@
 
 > Jogo da velha com IA para o TCC
 
-### 🏠 [Homepage](https://jogo-da-velha-com-ia.herokuapp.com/)
+### 🏠 [Homepage](https://jogo-da-velha-com-ia.herokuapp.com)
 
 ## Prerequisites
 
