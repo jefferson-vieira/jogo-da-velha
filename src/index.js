@@ -1,5 +1,7 @@
 import './index.scss';
 
+import 'configs';
+
 import { createElement } from 'react';
 import { render } from 'react-dom';
 
